@@ -7,6 +7,9 @@ namespace Monolog\Formatter;
  */
 class ColorLineFormatter extends LineFormatter
 {
+    const
+        COLOR_PATTERN = '~\[(?<closing>/?)(?<method>[a-z])(?:=(?<value>[a-z]+))?\]~';
+    
     public static
         $colors = array(
             'black'  => '30',
@@ -59,7 +62,7 @@ class ColorLineFormatter extends LineFormatter
         };
         
         return preg_replace_callback(
-            '~\[(?<closing>/?)(?<method>[a-z])(?:=(?<value>[a-z]+))?\]~',
+            self::COLOR_PATTERN,
             $callback,
             parent::format($record)
         );
