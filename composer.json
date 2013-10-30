@@ -1,7 +1,7 @@
 {
     "name": "kmelia/monolog-stdout-handler",
     "description": "A handler for Monolog that sends messages to stdout (with color).",
-    "keywords": ["log", "stdout", "color"],
+    "keywords": ["monolog", "log", "stdout", "color"],
     "homepage": "https://bitbucket.org/kmelia/monolog-stdout-handler",
     "license": "GPL-3.0+",
     "authors": [
