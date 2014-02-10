@@ -12,7 +12,7 @@ Balises currently recognized are :
 
 Example
 -------
-use `StdoutHandler`
+use stdout handler
 ```php
 <?php
 use Monolog\Logger;
