@@ -14,6 +14,7 @@ Example
 -------
 use `StdoutHandler`
 ```php
+<?php
 use Monolog\Logger;
 use Monolog\Handler\StdoutHandler;
 
@@ -25,11 +26,11 @@ $logger->error('[c=green]Hello world![/c]');
 ```
 
 remove colored formatter
-```php
+:::php
 use Monolog\Formatter\NoColorLineFormatter;
   
 $stdoutHandler->setFormatter(new NoColorLineFormatter(StdoutHandler::FORMAT));
-```
+:::
 
 
   [1]: https://github.com/Seldaek/monolog
