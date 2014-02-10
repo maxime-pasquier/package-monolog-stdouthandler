@@ -27,6 +27,7 @@ $logger->error('[c=green]Hello world![/c]');
 
 remove colored formatter
 ```php
+<?php
 use Monolog\Formatter\NoColorLineFormatter;
   
 $stdoutHandler->setFormatter(new NoColorLineFormatter(StdoutHandler::FORMAT));
