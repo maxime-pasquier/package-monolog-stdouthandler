@@ -17,7 +17,7 @@ class ColorLineFormatterTest extends TestCase
     
     private function getFormattedMessage($colorName)
     {
-        $message = sprintf('[c=%s]core dumped[/c].', $colorName);
+        $message = sprintf('[error][c=%s]core dumped[/c].', $colorName);
         
         return $this->formatter->format(
             $this->getRecord(Logger::ERROR, $message)
@@ -29,7 +29,7 @@ class ColorLineFormatterTest extends TestCase
      */
     public function testRealColor($colorName, $colorValue)
     {
-        $expected = sprintf("\033[%dmcore dumped\033[0m.\n", $colorValue);
+        $expected = sprintf("[error]\033[%dmcore dumped\033[0m.\n", $colorValue);
         $this->assertSame($expected, $this->getFormattedMessage($colorName));
     }
     
@@ -52,7 +52,7 @@ class ColorLineFormatterTest extends TestCase
      */
     public function testUnknownColor($colorName)
     {
-        $expected = "core dumped\033[0m.\n";
+        $expected = "[error]core dumped\033[0m.\n";
         $this->assertSame($expected, $this->getFormattedMessage($colorName));
     }
     
@@ -69,7 +69,7 @@ class ColorLineFormatterTest extends TestCase
      */
     public function testBadValue($colorName)
     {
-        $expected = sprintf("[c=%s]core dumped\033[0m.\n", $colorName);
+        $expected = sprintf("[error][c=%s]core dumped\033[0m.\n", $colorName);
         $this->assertSame($expected, $this->getFormattedMessage($colorName));
     }
     
