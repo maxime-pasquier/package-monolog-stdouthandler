@@ -84,4 +84,12 @@ class ColorLineFormatterTest extends TestCase
             array('dark_red'),
         );
     }
+    
+    public function testOtherCode()
+    {
+        $message = '[[c=yellow]warning[/c]][c=green][b]huge[/b] [comment]packet[/comment][/c] [c=white]is coming[/c].';
+        $expected = "[\033[33mwarning\033[0m]\033[32m[b]huge[/b] [comment]packet[/comment]\033[0m \033[37mis coming\033[0m.\n";
+        
+        $this->assertSame($expected, $this->formatter->format($this->getRecord(Logger::ERROR, $message)));
+    }
 }
