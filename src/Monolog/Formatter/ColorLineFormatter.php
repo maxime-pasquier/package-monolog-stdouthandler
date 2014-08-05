@@ -55,7 +55,7 @@ class ColorLineFormatter extends LineFormatter
             
             if( ! method_exists($selfClassName, $methodName) )
             {
-                return $input;
+                return $result[0];
             }
             
             return $selfClassName::$methodName($valueParameter);
