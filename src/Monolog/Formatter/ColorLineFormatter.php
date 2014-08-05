@@ -8,7 +8,7 @@ namespace Monolog\Formatter;
 class ColorLineFormatter extends LineFormatter
 {
     const
-        COLOR_PATTERN = '~\[(?<closing>/?)(?<method>[a-z])(?:=(?<value>[a-z]+))?\]~';
+        COLOR_PATTERN = '~\[(?<closing>/?)(?<method>c)(?:=(?<value>[a-z]+))?\]~';
     
     public static
         $colors = array(
@@ -55,7 +55,10 @@ class ColorLineFormatter extends LineFormatter
             
             if( ! method_exists($selfClassName, $methodName) )
             {
-                return $input;
+                throw new \LogicException(sprintf(
+                    'unable to find method %s',
+                    $methodName
+                ));
             }
             
             return $selfClassName::$methodName($valueParameter);
