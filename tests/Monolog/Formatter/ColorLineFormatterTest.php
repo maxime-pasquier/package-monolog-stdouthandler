@@ -36,6 +36,7 @@ class ColorLineFormatterTest extends TestCase
     public function providerTestColor()
     {
         return array(
+            array('none',   0),
             array('black',  30),
             array('red',    31),
             array('green',  32),
@@ -52,7 +53,7 @@ class ColorLineFormatterTest extends TestCase
      */
     public function testUnknownColor($colorName)
     {
-        $expected = "[error]core dumped\033[0m.\n";
+        $expected = "[error]\033[0mcore dumped\033[0m.\n";
         $this->assertSame($expected, $this->getFormattedMessage($colorName));
     }
     

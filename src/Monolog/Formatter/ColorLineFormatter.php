@@ -7,17 +7,19 @@ namespace Monolog\Formatter;
  */
 class ColorLineFormatter extends LineFormatter
 {
-    const COLOR_PATTERN = '~\[(?<closingSlash>/?)c(?:=(?<valueParameter>[a-z]+))?\]~';
+    const
+        COLOR_PATTERN = '~\[(?<closingSlash>/?)c(?:=(?<valueParameter>[a-z]+))?\]~',
+        NONE_COLOR    = 0;
     
     private $colors = array(
-        'black'  => '30',
-        'red'    => '31',
-        'green'  => '32',
-        'yellow' => '33',
-        'blue'   => '34',
-        'purple' => '35',
-        'cyan'   => '36',
-        'white'  => '37',
+        'black'  => 30,
+        'red'    => 31,
+        'green'  => 32,
+        'yellow' => 33,
+        'blue'   => 34,
+        'purple' => 35,
+        'cyan'   => 36,
+        'white'  => 37,
     );
     
     /**
@@ -48,23 +50,46 @@ class ColorLineFormatter extends LineFormatter
         return $this->applyBeginningColor($valueParameter);
     }
     
-    private function applyBeginningColor($color)
+    private function applyBeginningColor($valueParameter)
     {
-        $color = strtolower($color);
-        
-        if( empty($this->colors[$color]) )
-        {
-            return '';
-        }
-        
-        return sprintf(
-            "\033[%dm",
-            $this->colors[$color]
-        );
+        return $this->renderShellColor($this->getColorByName($valueParameter));
     }
     
     private function applyEndingColor()
     {
-        return "\033[0m";
+        return $this->renderShellColor(self::NONE_COLOR);
+    }
+    
+    /**
+     * Returns the shell color id for a specified color name or the default none color
+     * @param string $name
+     * @return int
+     */
+    private function getColorByName($name)
+    {
+        if( isset($this->colors[$name]) )
+        {
+            return $this->colors[$name];
+        }
+        
+        return self::NONE_COLOR;
+    }
+    
+    /**
+     * Render the shell color code
+     * @param unknown $id
+     * @throws \LogicException
+     */
+    private function renderShellColor($id)
+    {
+        if( ! is_int($id) )
+        {
+            throw new \LogicException('Unable to render the shell color.');
+        }
+        
+        return sprintf(
+            "\033[%dm",
+            $id
+        );
     }
 }
