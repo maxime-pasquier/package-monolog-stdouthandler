@@ -93,4 +93,25 @@ class ColorLineFormatterTest extends TestCase
         
         $this->assertSame($expected, $this->formatter->format($this->getRecord(Logger::ERROR, $message)));
     }
+    
+    /**
+     * @dataProvider providerTestInvalidRenderShellColor
+     * @expectedException \LogicException
+     */
+    public function testInvalidRenderShellColor($id)
+    {
+        ColorLineFormatter::renderShellColor($id);
+    }
+    
+    public function providerTestInvalidRenderShellColor()
+    {
+        return array(
+            array(null),
+            array(''),
+            array(' '),
+            array(true),
+            array(false),
+            array(new \StdClass()),
+        );
+    }
 }

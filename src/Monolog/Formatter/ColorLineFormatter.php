@@ -52,12 +52,12 @@ class ColorLineFormatter extends LineFormatter
     
     private function applyBeginningColor($valueParameter)
     {
-        return $this->renderShellColor($this->getColorByName($valueParameter));
+        return self::renderShellColor($this->getColorByName($valueParameter));
     }
     
     private function applyEndingColor()
     {
-        return $this->renderShellColor(self::NONE_COLOR);
+        return self::renderShellColor(self::NONE_COLOR);
     }
     
     /**
@@ -77,10 +77,10 @@ class ColorLineFormatter extends LineFormatter
     
     /**
      * Render the shell color code
-     * @param unknown $id
+     * @param integer $id
      * @throws \LogicException
      */
-    private function renderShellColor($id)
+    public static function renderShellColor($id)
     {
         if( ! is_int($id) )
         {
