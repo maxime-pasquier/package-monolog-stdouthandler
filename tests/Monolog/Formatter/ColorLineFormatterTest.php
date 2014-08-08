@@ -36,6 +36,7 @@ class ColorLineFormatterTest extends TestCase
     public function providerTestColor()
     {
         return array(
+            array('none',   0),
             array('black',  30),
             array('red',    31),
             array('green',  32),
@@ -52,7 +53,7 @@ class ColorLineFormatterTest extends TestCase
      */
     public function testUnknownColor($colorName)
     {
-        $expected = "[error]core dumped\033[0m.\n";
+        $expected = "[error]\033[0mcore dumped\033[0m.\n";
         $this->assertSame($expected, $this->getFormattedMessage($colorName));
     }
     
@@ -91,5 +92,26 @@ class ColorLineFormatterTest extends TestCase
         $expected = "[\033[33mwarning\033[0m]\033[32m[b]huge[/b] [comment]packet[/comment]\033[0m \033[37mis coming\033[0m.\n";
         
         $this->assertSame($expected, $this->formatter->format($this->getRecord(Logger::ERROR, $message)));
+    }
+    
+    /**
+     * @dataProvider providerTestInvalidRenderShellColor
+     * @expectedException \LogicException
+     */
+    public function testInvalidRenderShellColor($id)
+    {
+        ColorLineFormatter::renderShellColor($id);
+    }
+    
+    public function providerTestInvalidRenderShellColor()
+    {
+        return array(
+            array(null),
+            array(''),
+            array(' '),
+            array(true),
+            array(false),
+            array(new \StdClass()),
+        );
     }
 }
