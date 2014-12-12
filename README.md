@@ -13,7 +13,7 @@ Balises currently recognized are :
 
 Example
 -------
-use stdout handler
+How to use the stdout handler:
 ```php
 <?php
 use Monolog\Logger;
@@ -26,7 +26,7 @@ $logger->pushHandler($stdoutHandler);
 $logger->error('[c=green]Hello world![/c]');
 ```
 
-remove colored formatter
+How to remove the colored formatter:
 ```php
 <?php
 use Monolog\Formatter\NoColorLineFormatter;
