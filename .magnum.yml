@@ -1,5 +1,7 @@
 before_install:
+  # composer configuration
   - export COMPOSER_CACHE_DIR=.composer-cache/
+  - composer config github-oauth.github.com $githubToken
 
 #install:
 
