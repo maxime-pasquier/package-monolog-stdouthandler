@@ -1,0 +1,11 @@
+before_install:
+  - export COMPOSER_CACHE_DIR=.composer-cache/
+
+#install:
+
+#before_script:
+
+script:
+  - ./bin/phpunit -c tests/
+
+#after_script:
