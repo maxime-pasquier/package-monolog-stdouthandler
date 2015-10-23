@@ -12,3 +12,7 @@ branches:
   only:
     - master
     - develop
+
+install: composer install
+
+script: ./bin/phpunit -c tests/
