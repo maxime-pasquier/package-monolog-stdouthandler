@@ -10,7 +10,7 @@ class ColorLineFormatter extends LineFormatter
     const
         COLOR_PATTERN = '~\[(?<closingSlash>/?)c(?:=(?<valueParameter>[a-z]+))?\]~',
         NONE_COLOR    = 0;
-    
+
     private $colors = array(
         'black'  => 30,
         'red'    => 31,
@@ -21,17 +21,17 @@ class ColorLineFormatter extends LineFormatter
         'cyan'   => 36,
         'white'  => 37,
     );
-    
+
     /**
      * {@inheritdoc}
      */
-    public function format(array $record)
+    public function format(array $record): string
     {
         $output = parent::format($record);
-        
+
         return preg_replace_callback(self::COLOR_PATTERN, array($this, 'applyMethods'), $output);
     }
-    
+
     private function applyMethods(array $result)
     {
         // initialize value parameter
@@ -40,26 +40,26 @@ class ColorLineFormatter extends LineFormatter
         {
             $valueParameter = $result['valueParameter'];
         }
-        
+
         // case 'c' for color
         if( ! empty($result['closingSlash']) )
         {
             return $this->applyEndingColor();
         }
-        
+
         return $this->applyBeginningColor($valueParameter);
     }
-    
+
     private function applyBeginningColor($valueParameter)
     {
         return self::renderShellColor($this->getColorByName($valueParameter));
     }
-    
+
     private function applyEndingColor()
     {
         return self::renderShellColor(self::NONE_COLOR);
     }
-    
+
     /**
      * Returns the shell color id for a specified color name or the default none color
      * @param string $name
@@ -71,10 +71,10 @@ class ColorLineFormatter extends LineFormatter
         {
             return $this->colors[$name];
         }
-        
+
         return self::NONE_COLOR;
     }
-    
+
     /**
      * Render the shell color code
      * @param integer $id
@@ -86,7 +86,7 @@ class ColorLineFormatter extends LineFormatter
         {
             throw new \LogicException('Unable to render the shell color.');
         }
-        
+
         return sprintf(
             "\033[%dm",
             $id

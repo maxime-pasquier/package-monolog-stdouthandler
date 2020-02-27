@@ -10,7 +10,7 @@ class NoColorLineFormatter extends LineFormatter
     /**
      * {@inheritdoc}
      */
-    public function format(array $record)
+    public function format(array $record): string
     {
         return preg_replace(
             ColorLineFormatter::COLOR_PATTERN,

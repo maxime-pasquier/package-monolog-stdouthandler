@@ -2,7 +2,7 @@
 
 namespace Monolog\Handler;
 
-use Monolog\TestCase;
+use Monolog\Test\TestCase;
 use Monolog\Logger;
 use Monolog\Formatter\ColorLineFormatter;
 
