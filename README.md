@@ -1,7 +1,7 @@
 Monolog Stdout Handler
 ======================
-[![Latest Stable Version](https://poser.pugx.org/kmelia/monolog-stdout-handler/v/stable.png)](https://packagist.org/packages/kmelia/monolog-stdout-handler)
-[![Build Status](https://travis-ci.org/kmelia/monolog-stdout-handler.svg)](https://travis-ci.org/kmelia/monolog-stdout-handler)
+[![Latest Stable Version](https://poser.pugx.org/maxime-pasquier/monolog-stdout-handler/v/stable.png)](https://packagist.org/packages/maxime-pasquier/monolog-stdout-handler)
+[![Build Status](https://travis-ci.org/maxime-pasquier/monolog-stdout-handler.svg)](https://travis-ci.org/maxime-pasquier/monolog-stdout-handler)
 
 Provides a handler for [Monolog][1] that sends colored messages to stdout.
 Messages may be uncolored with a provided formatter.

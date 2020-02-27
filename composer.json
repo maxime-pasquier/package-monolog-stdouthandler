@@ -1,13 +1,13 @@
 {
-    "name": "kmelia/monolog-stdout-handler",
+    "name": "maxime-pasquier/monolog-stdout-handler",
     "description": "A handler for Monolog that sends messages to stdout (with color).",
     "keywords": ["monolog", "log", "stdout", "color"],
-    "homepage": "https://bitbucket.org/kmelia/monolog-stdout-handler",
+    "homepage": "https://bitbucket.org/maxime-pasquier/package-monolog-stdouthandler",
     "license": "GPL-3.0+",
     "authors": [
         {
             "name": "Maxime Pasquier",
-            "homepage": "https://bitbucket.org/kmelia",
+            "homepage": "https://bitbucket.org/maxime-pasquier/",
             "role": "Developer"
         }
     ],
