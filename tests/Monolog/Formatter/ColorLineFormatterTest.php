@@ -2,28 +2,28 @@
 
 namespace Monolog\Formatter;
 
-use Monolog\TestCase;
+use Monolog\Test\TestCase;
 use Monolog\Logger;
 use Monolog\Handler\StdoutHandler;
 
 class ColorLineFormatterTest extends TestCase
 {
     private $formatter;
-    
-    public function setUp()
+
+    protected function setUp(): void
     {
         $this->formatter = new ColorLineFormatter(StdoutHandler::FORMAT);
     }
-    
+
     private function getFormattedMessage($colorName)
     {
         $message = sprintf('[error][c=%s]core dumped[/c].', $colorName);
-        
+
         return $this->formatter->format(
             $this->getRecord(Logger::ERROR, $message)
         );
     }
-    
+
     /**
      * @dataProvider providerTestColor
      */
@@ -32,7 +32,7 @@ class ColorLineFormatterTest extends TestCase
         $expected = sprintf("[error]\033[%dmcore dumped\033[0m.\n", $colorValue);
         $this->assertSame($expected, $this->getFormattedMessage($colorName));
     }
-    
+
     public function providerTestColor()
     {
         return array(
@@ -47,7 +47,7 @@ class ColorLineFormatterTest extends TestCase
             array('white',  37),
         );
     }
-    
+
     /**
      * @dataProvider providerTestUnknownColor
      */
@@ -56,7 +56,7 @@ class ColorLineFormatterTest extends TestCase
         $expected = "[error]\033[0mcore dumped\033[0m.\n";
         $this->assertSame($expected, $this->getFormattedMessage($colorName));
     }
-    
+
     public function providerTestUnknownColor()
     {
         return array(
@@ -64,7 +64,7 @@ class ColorLineFormatterTest extends TestCase
             array('bar'),
         );
     }
-    
+
     /**
      * @dataProvider providerTestBadValue
      */
@@ -73,7 +73,7 @@ class ColorLineFormatterTest extends TestCase
         $expected = sprintf("[error][c=%s]core dumped\033[0m.\n", $colorName);
         $this->assertSame($expected, $this->getFormattedMessage($colorName));
     }
-    
+
     public function providerTestBadValue()
     {
         return array(
@@ -85,24 +85,25 @@ class ColorLineFormatterTest extends TestCase
             array('dark_red'),
         );
     }
-    
+
     public function testOtherCode()
     {
         $message = '[[c=yellow]warning[/c]][c=green][b]huge[/b] [comment]packet[/comment][/c] [c=white]is coming[/c].';
         $expected = "[\033[33mwarning\033[0m]\033[32m[b]huge[/b] [comment]packet[/comment]\033[0m \033[37mis coming\033[0m.\n";
-        
+
         $this->assertSame($expected, $this->formatter->format($this->getRecord(Logger::ERROR, $message)));
     }
-    
+
     /**
      * @dataProvider providerTestInvalidRenderShellColor
-     * @expectedException \LogicException
      */
     public function testInvalidRenderShellColor($id)
     {
+        $this->expectException(\LogicException::class);
+
         ColorLineFormatter::renderShellColor($id);
     }
-    
+
     public function providerTestInvalidRenderShellColor()
     {
         return array(

@@ -4,6 +4,7 @@ namespace Monolog\Handler;
 
 use Monolog\Logger;
 use Monolog\Formatter\ColorLineFormatter;
+use Monolog\Formatter\FormatterInterface;
 
 /**
  * Stores to stdout
@@ -19,13 +20,13 @@ class StdoutHandler extends StreamHandler
     {
         parent::__construct('php://stdout', $level, $bubble);
     }
-    
+
     /**
      * Gets the default formatter.
      *
      * @return FormatterInterface
      */
-    protected function getDefaultFormatter()
+    protected function getDefaultFormatter(): FormatterInterface
     {
         return new ColorLineFormatter(self::FORMAT);
     }

@@ -2,28 +2,28 @@
 
 namespace Monolog\Formatter;
 
-use Monolog\TestCase;
+use Monolog\Test\TestCase;
 use Monolog\Logger;
 use Monolog\Handler\StdoutHandler;
 
 class NoColorLineFormatterTest extends TestCase
 {
     private $formatter;
-    
-    public function setUp()
+
+    protected function setUp(): void
     {
         $this->formatter = new NoColorLineFormatter(StdoutHandler::FORMAT);
     }
-    
+
     private function getFormattedMessage($colorName)
     {
         $message = sprintf('[info][c=%1$s]black[/c] and [c=%1$s]white[/c]!', $colorName);
-        
+
         return $this->formatter->format(
             $this->getRecord(Logger::INFO, $message)
         );
     }
-    
+
     /**
      * @dataProvider providerTestColor
      */
@@ -32,7 +32,7 @@ class NoColorLineFormatterTest extends TestCase
         $expected = "[info]black and white!\n";
         $this->assertSame($expected, $this->getFormattedMessage($colorName));
     }
-    
+
     public function providerTestColor()
     {
         return array(
@@ -50,12 +50,12 @@ class NoColorLineFormatterTest extends TestCase
             array('null'),
         );
     }
-    
+
     public function testOtherCode()
     {
         $message = '[[c=red]/!\[/c]]use [u][c=blue]no color[/c][/u] with care!';
         $expected = "[/!\]use [u]no color[/u] with care!\n";
-        
+
         $this->assertSame($expected, $this->formatter->format($this->getRecord(Logger::ERROR, $message)));
     }
 }
