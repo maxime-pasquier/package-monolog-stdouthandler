@@ -30,7 +30,7 @@ How to remove the colored formatter:
 ```php
 <?php
 use Monolog\Formatter\NoColorLineFormatter;
-  
+
 $stdoutHandler->setFormatter(new NoColorLineFormatter(StdoutHandler::FORMAT));
 ```
 
